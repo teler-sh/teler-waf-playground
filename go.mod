@@ -1,6 +1,6 @@
 module teler-waf-playground
 
-go 1.21.0
+go 1.21
 
 require (
 	cloud.google.com/go v0.110.0 // indirect
