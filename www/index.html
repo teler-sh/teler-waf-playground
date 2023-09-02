@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js" integrity="sha512-8RnEqURPUc5aqFEN04aQEiPlSAdE0jlFS/9iGgUyNtwFnSKCXhmB6ZTNl7LnDtDWKabJIASzXrzD0K+LYexU9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/yaml/yaml.min.js" integrity="sha512-+aXDZ93WyextRiAZpsRuJyiAZ38ztttUyO/H3FZx4gOAOv4/k9C6Um1CvHVtaowHZ2h7kH0d+orWvdBLPVwb4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/scroll/simplescrollbars.min.js" integrity="sha512-1Vc3i/yplqkVbJBGgEpx9odVj3SLHMx2EOsQOMJsHbM5LRPL2iaPH2sEE+8sZOCqvuXGignKEwmTqO6/b11RqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/scroll/simplescrollbars.min.css" integrity="sha512-2y3NTsei81d5emn5nwrdflyI5EGULwKXRZ0BCbO55cjgQ8x62X4ydH/jbnzrKnxArstf79F9n6z1j2MtVmJ8YA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="icon" href="/favicon.ico"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@800&family=Poppins&display=swap" rel="stylesheet">
+  <!-- Primary Meta Tags -->
+  <title>play.teler.sh — teler WAF playground</title>
+  <meta name="title" content="play.teler.sh — teler WAF playground">
+  <meta name="description" content="teler WAF playground">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://play.teler.sh">
+  <meta property="og:title" content="play.teler.sh — teler WAF playground">
+  <meta property="og:description" content="teler WAF playground">
+  <meta property="og:image" content="/assets/thumb.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://play.teler.sh">
+  <meta property="twitter:title" content="play.teler.sh — teler WAF playground">
+  <meta property="twitter:description" content="teler WAF playground">
+  <meta property="twitter:image" content="/assets/thumb.png">
+</head>
+</head>
+<body>
+<h1>teler WAF Playground</h1>
+
+<div class="playground">
+  <button type="button" onclick="return bake(this);">Play</button>
+  <button type="button" onclick="return clearLogs();">Clear logs</button>
+  <div class="config language-yaml">
+    <!-- Main -->
+    <textarea id="config" name="config" required>##
+# See https://github.com/kitabisa/teler-waf#custom-rules to write your own rules
+# See https://github.com/kitabisa/teler-waf#dsl-expression to write your own DSL expressions
+##
+
+excludes:
+  # - 1 # CommonWebAttack
+  # - 2 # CVE
+  - 3 # BadIPAddress
+  - 4 # BadReferrer
+  # - 5 # BadCrawler
+  # - 6 # DirectoryBruteforce
+whitelists:
+  - request.Headers matches "(curl|Go-http-client|okhttp)/*" && threat == BadCrawler
+  - request.URI startsWith "/wp-login.php"
+  - request.IP in ["127.0.0.1", "::1", "0.0.0.0"]
+  - request.Headers contains "authorization" && request.Method == "POST"
+customs:
+  - name: Log4j Attack
+    condition: or
+    rules:
+      - method: GET
+        element: 0 # 0 = URI, 1 = Headers, 2 = Body, 3 = Any
+        pattern: \$\{.*:\/\/.*\/?\w+?\}
+        dsl: ""
+  - name: Body Contains "foo" String
+    condition: or
+    rules:
+      - method: ""
+        element: 0
+        pattern: ""
+        dsl: request.Body contains "foo"
+  - name: Headers Contains "curl" String
+    condition: or
+    rules:
+      - method: ""
+        element: 0
+        pattern: ""
+        dsl: request.Headers contains "curl"
+  - name: Request IP Address is Localhost
+    condition: or
+    rules:
+      - method: ""
+        element: 0
+        pattern: ""
+        dsl: request.IP in ["127.0.0.1", "::1", "0.0.0.0"]
+  - name: LDAP Injection
+    condition: or
+    rules:
+      - method: ALL
+        element: 3
+        pattern: (and|or|not|&&|\|\|)
+        dsl: ""
+  - name: Method is GET
+    condition: or
+    rules:
+      - method: ""
+        element: 0
+        pattern: ""
+        dsl: request.Method == "GET"
+  - name: Request Contains "foo" String
+    condition: or
+    rules:
+      - method: ""
+        element: 0
+        pattern: ""
+        dsl: 'one(request.ALL, # contains "foo")'
+  - name: SQL Injection
+    condition: or
+    rules:
+      - method: ALL
+        element: 0
+        pattern: (union|select|insert|update|delete|drop|alter)
+        dsl: ""</textarea>
+  </div>  
+  <div class="request">
+    <textarea id="request" name="request" required>POST / HTTP/1.1
+Host: teler.host
+User-Agent: X
+
+foo=bar</textarea>
+  </div>
+  <div class="output">
+    <textarea id="logs" placeholder="Response" disabled></textarea>
+    <p>
+      <ul>
+        <li><b>error</b> means failed to process config and/or request</li>
+        <li>the <b>message</b> appears is that the request was detected as a threat, or teler-waf managed to catch it based on the config</li>
+        <li><b>ok</b> is <code>:ok:</code> <code>¯\_(ツ)_/¯</code></li>
+        <li>don't even bother SSRFing the server, it's a total waste of time. give it a shot if u don't trust me, dawg. 💀</li>
+      </ul>
+    </p>
+  </div>
+</div>
+<footer>
+<hr>
+<span>made with <i>"is it <3? idk, you tell me"</i> by dw1</span>
+</footer>
+<script src="/assets/script.js"></script>
+</body>
+</html>
+
+
