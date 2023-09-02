@@ -1,5 +1,6 @@
 body {
   font-family: 'Poppins', sans-serif;
+  padding: 15px;
 }
 
 h1 {
@@ -38,7 +39,7 @@ h1 {
 }
 
 .output > textarea {
-  width: 100%;
+  width: 98.9%;
   height: 125px;
   margin-bottom: -5px;
   resize: none
