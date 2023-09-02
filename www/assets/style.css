@@ -45,7 +45,8 @@ h1 {
 }
 
 #logs {
-  background-color: #faff001a
+  background-color: #faff001a;
+  color: black;
 }
 
 footer {
