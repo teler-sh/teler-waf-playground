@@ -42,6 +42,10 @@ function prePlay() {
   }
 }
 
+function updateLogScroll() {
+  l.scrollTop = l.scrollHeight;
+}
+
 async function bake(e) {
   prePlay();
 
@@ -73,6 +77,7 @@ async function bake(e) {
     console.error(e);
   }
 
+  updateLogScroll();
   e.disabled = false;
 }
 
