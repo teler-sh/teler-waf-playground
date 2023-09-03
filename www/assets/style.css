@@ -8,7 +8,7 @@ h1 {
 }
 
 .CodeMirror {
-  position:relative;
+  position: relative;
   float: left;
   width: 50%;
   border: 1px solid #eee;
@@ -58,4 +58,16 @@ footer {
   text-align: center;
   background-color: #d8d8d8;
   padding: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    padding: 5px;
+    padding-bottom: 20px;
+  }
+
+  .CodeMirror {
+    width: 100% !important;
+    height: 250px;
+  }
 }
