@@ -16,7 +16,9 @@ func init() {
     hostPort = net.JoinHostPort("0.0.0.0", port)
 
     meta = map[string]interface{}{
-        "Version": telerWAFVersion,
+        "Version":     telerWAFVersion,
+        "BuildDate":   buildDate,
+        "BuildCommit": buildCommit,
     }
 }
 
@@ -25,6 +27,7 @@ func main() {
     http.HandleFunc("/", indexHandler)
     http.HandleFunc("/api/play", playHandler)
 
+    log.Printf("teler-waf-playground %s (date: %s)\n", buildCommit, buildDate)
     log.Printf("teler-waf version %s\n", telerWAFVersion)
     log.Printf("Server started on http://%s\n", hostPort)
     if err := http.ListenAndServe(hostPort, nil); err != nil {

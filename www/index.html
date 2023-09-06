@@ -36,7 +36,6 @@
 </head>
 <body>
 <h1>teler WAF Playground</h1>
-<pre>> teler-waf version <a href="https://github.com/kitabisa/teler-waf/releases/tag/{{ .Version }}">{{ .Version }}</a></pre>
 <div class="playground">
   <button id="play" type="button" onclick="return bake(this);">Play</button>
   <button id="clear" type="button" onclick="return clearLogs();">Clear logs</button>
@@ -139,6 +138,11 @@ some=body</textarea>
       </ul>
     </p>
   </div>
+<hr>
+<pre>
+> teler-waf version <a href="https://github.com/kitabisa/teler-waf/releases/tag/{{ .Version }}">{{ .Version }}</a>
+> build <a href="https://github.com/teler-sh/teler-waf-playground/commit/{{ .BuildCommit }}">{{ .BuildCommit }}</a> @ {{ .BuildDate }}
+</pre>
 </div>
 <footer>
 <span>made with <i>"is it <3? idk, you tell me"</i> by dw1</span>
