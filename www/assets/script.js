@@ -7,6 +7,9 @@ const style = {
   scrollbarStyle: "overlay",
 };
 
+const config = document.getElementById("config");
+const request = document.getElementById("request");
+
 const l = document.getElementById("logs");
 let c = CodeMirror.fromTextArea(config, style);
 let r = CodeMirror.fromTextArea(request, style);
@@ -84,4 +87,9 @@ async function bake(e) {
 function clearLogs() {
   l.innerHTML = "";
   l.classList.remove("err-bg");
+}
+
+function reset() {
+  c.setValue(config.value)
+  r.setValue(request.value)
 }
