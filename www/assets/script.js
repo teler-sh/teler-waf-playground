@@ -10,6 +10,10 @@ const style = {
 const config = document.getElementById("config");
 const request = document.getElementById("request");
 
+const playBtn = document.getElementById("play");
+const clearBtn = document.getElementById("clear");
+const resetBtn = document.getElementById("reset");
+
 const l = document.getElementById("logs");
 let c = CodeMirror.fromTextArea(config, style);
 let r = CodeMirror.fromTextArea(request, style);
@@ -93,3 +97,15 @@ function reset() {
   c.setValue(config.value)
   r.setValue(request.value)
 }
+
+document.addEventListener('keydown', (e) => {
+  const keyToBtn = { 'p': playBtn, 'c': clearBtn, 'r': resetBtn };
+
+  if (e.ctrlKey) {
+    const button = keyToBtn[e.key.toLowerCase()];
+    if (button) {
+      e.preventDefault();
+      button.click();
+    }
+  }
+});

@@ -38,9 +38,9 @@
 <h1>teler WAF Playground</h1>
 
 <div class="playground">
-  <button type="button" onclick="return bake(this);">Play</button>
-  <button type="button" onclick="return clearLogs();">Clear logs</button>
-  <button type="button" onclick="return reset();">Reset</button>
+  <button id="play" type="button" onclick="return bake(this);">Play</button>
+  <button id="clear" type="button" onclick="return clearLogs();">Clear logs</button>
+  <button id="reset" type="button" onclick="return reset();">Reset</button>
   <div class="config language-yaml">
     <!-- Main -->
     <textarea id="config" name="config" required>##
@@ -133,6 +133,7 @@ some=body</textarea>
         <li><b>error</b> means failed to process config and/or request</li>
         <li>the <b>message</b> appears is that the request was detected as a threat, or teler-waf managed to catch it based on the config</li>
         <li><b>ok</b> is <code>:ok:</code> <code>¯\_(ツ)_/¯</code></li>
+        <li>shortcuts: <b><code>Ctrl+P</code></b> to play, <b><code>Ctrl+C</code></b> to clear logs, and <b><code>Ctrl+R</code></b> to reset forms</li>
         <li>don't even bother SSRFing the server, it's useless. give it a shot if u don't trust me, dawg 💀</li>
         <li>feeling a bit mischievous & want to test a teler WAF under the influence? give <a href="https://waf.teler.app">waf.teler.app</a> a spin!</li>
       </ul>
