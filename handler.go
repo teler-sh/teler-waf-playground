@@ -7,12 +7,27 @@ import (
 	"strings"
 
 	"encoding/json"
+	"html/template"
 	"net/http"
 	"net/http/httptest"
 
 	"github.com/kitabisa/teler-waf"
 	"github.com/kitabisa/teler-waf/option"
 )
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("www/index.html")
+	if err != nil {
+		handleError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	err = tmpl.Execute(w, meta)
+	if err != nil {
+		handleError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+}
 
 func playHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
