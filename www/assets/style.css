@@ -8,6 +8,10 @@ h1 {
   font-family: 'Epilogue', sans-serif;
 }
 
+a, a::before, a::after {
+  color: #f800f9;
+}
+
 .CodeMirror {
   position: relative;
   float: left;
