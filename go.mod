@@ -2,7 +2,7 @@ module teler-waf-playground
 
 go 1.21
 
-require github.com/kitabisa/teler-waf v1.1.7
+require github.com/kitabisa/teler-waf v1.2.0-alpha.1
 
 require (
 	cloud.google.com/go v0.110.0 // indirect
