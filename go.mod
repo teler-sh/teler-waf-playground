@@ -2,7 +2,7 @@ module teler-waf-playground
 
 go 1.21
 
-require github.com/kitabisa/teler-waf v1.2.0-alpha.1
+require github.com/kitabisa/teler-waf v1.2.0-beta.1
 
 require (
 	cloud.google.com/go v0.110.0 // indirect
@@ -14,6 +14,7 @@ require (
 	github.com/aws/aws-sdk-go v1.44.296 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d // indirect
+	github.com/bitfield/script v0.22.0 // indirect
 	github.com/daniel-hutao/spinlock v0.1.0 // indirect
 	github.com/dwisiswant0/clientip v0.3.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
@@ -31,6 +32,8 @@ require (
 	github.com/hashicorp/go-getter v1.7.2 // indirect
 	github.com/hashicorp/go-safetemp v1.0.0 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
+	github.com/itchyny/gojq v0.12.12 // indirect
+	github.com/itchyny/timefmt-go v0.1.5 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
@@ -52,7 +55,7 @@ require (
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	go.uber.org/zap v1.25.0 // indirect
+	go.uber.org/zap v1.26.0 // indirect
 	golang.org/x/crypto v0.12.0 // indirect
 	golang.org/x/exp v0.0.0-20230315142452-642cacee5cc0 // indirect
 	golang.org/x/net v0.14.0 // indirect
@@ -68,4 +71,5 @@ require (
 	google.golang.org/grpc v1.56.1 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+	mvdan.cc/sh/v3 v3.6.0 // indirect
 )
