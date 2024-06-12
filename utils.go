@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/kitabisa/teler-waf"
+	"github.com/teler-sh/teler-waf"
 )
 
 func handleError(w http.ResponseWriter, status int, message string) {

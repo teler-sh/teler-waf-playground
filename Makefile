@@ -1,4 +1,4 @@
-TELER_WAF_VERSION := $(shell go list -m -f '{{ .Version }}' github.com/kitabisa/teler-waf)
+TELER_WAF_VERSION := $(shell go list -m -f '{{ .Version }}' github.com/teler-sh/teler-waf)
 
 BUILD_DATE := $(shell date '+%D %T %Z')
 BUILD_COMMIT := $(shell git rev-parse --short HEAD)

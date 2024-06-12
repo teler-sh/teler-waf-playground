@@ -11,8 +11,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/kitabisa/teler-waf"
-	"github.com/kitabisa/teler-waf/option"
+	"github.com/teler-sh/teler-waf"
+	"github.com/teler-sh/teler-waf/option"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
